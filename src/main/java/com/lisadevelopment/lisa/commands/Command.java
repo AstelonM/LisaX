@@ -53,7 +53,7 @@ public abstract class Command {
         return false;
     }
 
-    public MessageEmbed toHelpFormatEmbed() {
+    public MessageEmbed toHelpFormat(String commandName) {
         EmbedBuilder result = new EmbedBuilder()
                 .setAuthor("Command info", null, listener.getJda().getSelfUser().getEffectiveAvatarUrl())
                 .setColor(Config.BOT_COLOR)
@@ -83,5 +83,37 @@ public abstract class Command {
         for (i = 1; i < flags.length; i++)
             result.append(", ").append(flags[i].getName());
         return result.toString();
+    }
+
+    public String getPrefix() {
+        return listener.getPrefix();
+    }
+
+    public ChatListener getListener() {
+        return listener;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public String[] getAliases() {
+        return aliases;
+    }
+
+    public String getExamples() {
+        return examples;
+    }
+
+    public Flag[] getFlags() {
+        return flags;
     }
 }

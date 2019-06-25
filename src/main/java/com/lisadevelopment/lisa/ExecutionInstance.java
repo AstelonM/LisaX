@@ -16,7 +16,7 @@ public class ExecutionInstance {
     private User author;
     private Member member;
     private String text;
-    private HashSet<Flag> params;
+    private HashSet<Flag> flags;
     private String result;
     private boolean shouldReply;
 
@@ -29,7 +29,7 @@ public class ExecutionInstance {
     }
 
     private void init(MessageReceivedEvent event, String command, String text) {
-        params = new HashSet<>();
+        flags = new HashSet<>();
         this.event = event;
         this.command = command;
         this.channel = event.getChannel();
@@ -73,8 +73,8 @@ public class ExecutionInstance {
         return text;
     }
 
-    public HashSet<Flag> getParams() {
-        return params;
+    public HashSet<Flag> getFlags() {
+        return flags;
     }
 
     public String getResult() {

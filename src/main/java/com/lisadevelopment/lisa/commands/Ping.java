@@ -9,9 +9,9 @@ public class Ping extends Command {
         super(listener);
         name = "ping";
         description = "Get the ping of the bot.";
-        usage = listener.getPrefix() + "ping";
+        usage = getPrefix() + "ping";
         aliases = new String[] { "pong" };
-        examples = listener.getPrefix() + "ping";
+        examples = getPrefix() + "ping";
     }
 
     @Override
