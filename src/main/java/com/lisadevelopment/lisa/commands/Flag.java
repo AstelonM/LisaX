@@ -11,4 +11,28 @@ public abstract class Flag {
         this.description = description;
         this.aliases = aliases;
     }
+
+    public boolean isFlag(String text) {
+        if (name.equalsIgnoreCase(text))
+            return true;
+        if (aliases != null) {
+            int i;
+            for (i = 0; i < aliases.length; i++)
+                if (aliases[i].equalsIgnoreCase(text))
+                    return true;
+        }
+        return false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String[] getAliases() {
+        return aliases;
+    }
 }

@@ -1,9 +1,13 @@
 package com.lisadevelopment.lisa.commands;
 
 import com.lisadevelopment.lisa.ChatListener;
+import com.lisadevelopment.lisa.Config;
 import com.lisadevelopment.lisa.ExecutionInstance;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.time.Instant;
 
 public abstract class Command {
 
@@ -47,5 +51,37 @@ public abstract class Command {
                     return true;
         }
         return false;
+    }
+
+    public MessageEmbed toHelpFormatEmbed() {
+        EmbedBuilder result = new EmbedBuilder()
+                .setAuthor("Command info", null, listener.getJda().getSelfUser().getEffectiveAvatarUrl())
+                .setColor(Config.BOT_COLOR)
+                .setTimestamp(Instant.now());
+        if (aliases == null || aliases.length == 0)
+            result.addField("Name:", name, false);
+        else
+            result.addField("Name and aliases:", formatNamesToString(), false);
+        result.addField("Description:", description, false)
+                .addField("Usage:", usage, false);
+        if (flags != null && flags.length > 0)
+            result.addField("Flags:", formatFlagsToString(), false);
+        return result.build();
+    }
+
+    public String formatNamesToString() {
+        StringBuilder result = new StringBuilder(name);
+        int i;
+        for (i = 0; i < aliases.length; i++)
+            result.append(", ").append(aliases[i]);
+        return result.toString();
+    }
+
+    public String formatFlagsToString() {
+        StringBuilder result = new StringBuilder(flags[0].getName());
+        int i;
+        for (i = 1; i < flags.length; i++)
+            result.append(", ").append(flags[i].getName());
+        return result.toString();
     }
 }

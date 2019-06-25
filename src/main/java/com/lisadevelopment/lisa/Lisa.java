@@ -9,7 +9,7 @@ public class Lisa {
 
     public static void main(String[] args) throws LoginException, InterruptedException {
         JDA jda = new JDABuilder(Config.TOKEN).build().awaitReady();
-        ChatListener listener = new ChatListener();
+        ChatListener listener = new ChatListener(jda);
 
         jda.addEventListener(listener);
     }
