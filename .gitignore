@@ -1,5 +1,8 @@
+# IntelliJ files
+.idea/uiDesigner.xml
+.idea/vcs.xml
 .gradle
-/build/
+build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
