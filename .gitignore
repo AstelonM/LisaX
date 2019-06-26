@@ -1,6 +1,7 @@
 # IntelliJ files
+.idea/misc.xml
+.idea/workspace.xml
 .idea/uiDesigner.xml
-.idea/vcs.xml
 .gradle
 build/
 
@@ -43,5 +44,5 @@ hs_err_pid*
 # Node.js stufs
 node_modules
 
-#config file(s)
+# config file(s)
 *.properties

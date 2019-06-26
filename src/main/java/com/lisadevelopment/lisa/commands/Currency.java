@@ -3,9 +3,9 @@ package com.lisadevelopment.lisa.commands;
 import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.ExecutionInstance;
 
-public class CurrencyCommand extends Command
+public class Currency extends Command
 {
-    public CurrencyCommand(ChatListener listener) {
+    public Currency(ChatListener listener) {
         super(listener);
         name = "currency";
         description = "Get the value of a currency or convert between currencies";
