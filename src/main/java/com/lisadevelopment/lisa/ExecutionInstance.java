@@ -33,11 +33,17 @@ public class ExecutionInstance {
         this.event = event;
         this.command = command;
         this.channel = event.getChannel();
-        this.textChannel = event.getTextChannel();
-        this.guild = event.getGuild();
         this.author = event.getAuthor();
-        this.member = event.getMember();
         this.text = text;
+        if (event.isFromGuild()) {
+            textChannel = event.getTextChannel();
+            guild = event.getGuild();
+            member = event.getMember();
+        } else {
+            textChannel = null;
+            guild = null;
+            member = null;
+        }
         shouldReply = true;
     }
 
@@ -47,6 +53,10 @@ public class ExecutionInstance {
 
     public void setEvent(MessageReceivedEvent event) {
         this.event = event;
+    }
+
+    public Message getMessage() {
+        return event.getMessage();
     }
 
     public String getCommand() {
