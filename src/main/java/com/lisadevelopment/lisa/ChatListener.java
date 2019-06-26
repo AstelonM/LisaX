@@ -23,23 +23,23 @@ public class ChatListener implements EventListener, CommandHolder {
 
     private NullCommand nullCommand;
 
-    private Flag silentParam = new Flag("silent",
+    private Flag silentFlag = new Flag("silent",
             "No response message will be sent.",
             new String[] { "s" }
     );
-    private Flag deleteParam = new Flag("delete",
+    private Flag deleteFlag = new Flag("delete",
             "The command will be deleted if possible.",
             new String[] { "del", "d" }
     );
-    private Flag chainingParam = new Flag("chaining",
+    private Flag chainingFlag = new Flag("chaining",
             "Executes chained commands.",
             new String[] { "ch", "appending", "ap" }
     );
-    private Flag chainedParam = new Flag("chained",
+    private Flag chainedFlag = new Flag("chained",
             "Marks that a command is chained.",
             new String[0]
     );
-    private Flag ignoreParam = new Flag("ignore",
+    private Flag ignoreFlag = new Flag("ignore",
             "The command won't be executed (it will still count against limits).",
             new String[] { "ig" }
     );
@@ -124,23 +124,23 @@ public class ChatListener implements EventListener, CommandHolder {
         return nullCommand.isCommand(text);
     }
 
-    public Flag getSilentParam() {
-        return silentParam;
+    public Flag getSilentFlag() {
+        return silentFlag;
     }
 
-    public Flag getDeleteParam() {
-        return deleteParam;
+    public Flag getDeleteFlag() {
+        return deleteFlag;
     }
 
-    public Flag getChainingParam() {
-        return chainingParam;
+    public Flag getChainingFlag() {
+        return chainingFlag;
     }
 
-    public Flag getChainedParam() {
-        return chainedParam;
+    public Flag getChainedFlag() {
+        return chainedFlag;
     }
 
-    public Flag getIgnoreParam() {
-        return ignoreParam;
+    public Flag getIgnoreFlag() {
+        return ignoreFlag;
     }
 }

@@ -71,7 +71,7 @@ public class ChainParser {
         String currentCommandName = StringUtils.firstWord(currentCommandHead, listener.getFlagSeparator());
         Command currentCommand = listener.findCommand(currentCommandName);
         ExecutionInstance args = new ExecutionInstance(event, currentCommandName, parsedCommandResult);
-        args.addParam(listener.getChainedParam());
+        args.addParam(listener.getChainedFlag());
         if (currentCommand.treatHeader(args))
             currentCommand.treat(args);
         else

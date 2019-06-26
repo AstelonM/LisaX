@@ -15,8 +15,8 @@ public class Ping extends Command {
         aliases = new String[] { "pong" };
         examples = getPrefix() + "ping";
         flags = new Flag[] {
-                listener.getIgnoreParam(),
-                listener.getDeleteParam()
+                listener.getIgnoreFlag(),
+                listener.getDeleteFlag()
         };
     }
 

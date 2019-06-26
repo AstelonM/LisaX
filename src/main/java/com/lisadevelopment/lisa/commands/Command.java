@@ -55,7 +55,7 @@ public abstract class Command {
             Flag flag = findFlag(headerFlags[i]);
             if (flag == null)
                 continue;
-            if (flag.equals(listener.getIgnoreParam())) {
+            if (flag.equals(listener.getIgnoreFlag())) {
                 instance.setResult(instance.getText());
                 return false;
             }
@@ -63,12 +63,12 @@ public abstract class Command {
                 continue;
             commandFlags.add(flag);
         }
-        boolean chained = commandFlags.contains(listener.getChainedParam());
-        if (commandFlags.contains(listener.getDeleteParam()) && !chained)
+        boolean chained = commandFlags.contains(listener.getChainedFlag());
+        if (commandFlags.contains(listener.getDeleteFlag()) && !chained)
             DiscordUtils.tryDelete(instance.getEvent().getMessage());
-        if (commandFlags.contains(listener.getSilentParam()) || chained)
+        if (commandFlags.contains(listener.getSilentFlag()) || chained)
             instance.setShouldReply(false);
-        if (commandFlags.contains(listener.getChainingParam()) && !chained)
+        if (commandFlags.contains(listener.getChainingFlag()) && !chained)
             instance.setText(new ChainParser(listener, instance.getEvent()).translate());
         return true;
     }
