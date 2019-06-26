@@ -1,11 +1,14 @@
 package com.lisadevelopment.lisa.commands;
 
+import com.lisadevelopment.lisa.ChainParser;
 import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.Config;
 import com.lisadevelopment.lisa.ExecutionInstance;
 import com.lisadevelopment.lisa.utils.DiscordUtils;
 import com.lisadevelopment.lisa.utils.StringUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -63,7 +66,10 @@ public abstract class Command {
         boolean chained = commandFlags.contains(listener.getChainedParam());
         if (commandFlags.contains(listener.getDeleteParam()) && !chained)
             DiscordUtils.tryDelete(instance.getEvent().getMessage());
-        //TODO silence flag and chaining flag
+        if (commandFlags.contains(listener.getSilentParam()) || chained)
+            instance.setShouldReply(false);
+        if (commandFlags.contains(listener.getChainingParam()) && !chained)
+            instance.setText(new ChainParser(listener, instance.getEvent()).translate());
         return true;
     }
 
@@ -121,6 +127,33 @@ public abstract class Command {
         for (i = 1; i < flags.length; i++)
             result.append(", ").append(flags[i].getName());
         return result.toString();
+    }
+
+    public void sendMessage(ExecutionInstance instance, MessageChannel channel, String text) {
+        if (instance.isShouldReply())
+            channel.sendMessage(text).queue();
+    }
+
+    public void sendMessage(ExecutionInstance instance, MessageChannel channel, MessageEmbed embed) {
+        if (instance.isShouldReply())
+            channel.sendMessage(embed).queue();
+    }
+
+    public void sendMessage(ExecutionInstance instance, MessageChannel channel, Message message) {
+        if (instance.isShouldReply())
+            channel.sendMessage(message).queue();
+    }
+
+    public void sendMessage(ExecutionInstance instance, Message message) {
+        sendMessage(instance, instance.getChannel(), message);
+    }
+
+    public void sendMessage(ExecutionInstance instance, String text) {
+        sendMessage(instance, instance.getChannel(), text);
+    }
+
+    public void sendMessage(ExecutionInstance instance, MessageEmbed embed) {
+        sendMessage(instance, instance.getChannel(), embed);
     }
 
     public String getPrefix() {

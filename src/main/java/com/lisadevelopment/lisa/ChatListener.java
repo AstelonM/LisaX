@@ -2,6 +2,7 @@ package com.lisadevelopment.lisa;
 
 import com.lisadevelopment.lisa.commands.Command;
 import com.lisadevelopment.lisa.commands.Flag;
+import com.lisadevelopment.lisa.commands.NullCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -18,6 +19,8 @@ public class ChatListener implements EventListener, CommandHolder {
     private String prefix = "//";
     private String flagSeparator = "-";
     private CommandHolder commands;
+
+    private NullCommand nullCommand;
 
     private Flag silentParam = new Flag("silent",
             "No response message will be sent.",
@@ -43,6 +46,7 @@ public class ChatListener implements EventListener, CommandHolder {
     public ChatListener(JDA jda) {
         this.jda = jda;
         commands = new CommandHolderImpl();
+        nullCommand = new NullCommand(this);
     }
 
     @Override
@@ -102,6 +106,10 @@ public class ChatListener implements EventListener, CommandHolder {
 
     public String getFlagSeparator() {
         return flagSeparator;
+    }
+
+    public boolean isNullCommand(String text) {
+        return nullCommand.isCommand(text);
     }
 
     public Flag getSilentParam() {

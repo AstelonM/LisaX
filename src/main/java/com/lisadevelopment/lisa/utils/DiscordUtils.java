@@ -1,6 +1,7 @@
 package com.lisadevelopment.lisa.utils;
 
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 
@@ -19,10 +20,11 @@ public class DiscordUtils {
         }
     }
 
-    public static void tryDelete(Message message) { //TODO
-        TextChannel channel = message.getTextChannel();
-        if (!message.getGuild().getSelfMember().hasPermission(channel, Permission.MESSAGE_MANAGE))
-            return;
-        message.delete().queue();
+    public static void tryDelete(Message message) {
+        if (message.isFromType(ChannelType.TEXT)) {
+            TextChannel channel = message.getTextChannel();
+            if (message.getGuild().getSelfMember().hasPermission(channel, Permission.MESSAGE_MANAGE))
+                message.delete().queue();
+        }
     }
 }

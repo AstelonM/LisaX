@@ -45,36 +45,76 @@ public class ExecutionInstance {
         return event;
     }
 
+    public void setEvent(MessageReceivedEvent event) {
+        this.event = event;
+    }
+
     public String getCommand() {
         return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
     }
 
     public MessageChannel getChannel() {
         return channel;
     }
 
+    public void setChannel(MessageChannel channel) {
+        this.channel = channel;
+    }
+
     public TextChannel getTextChannel() {
         return textChannel;
+    }
+
+    public void setTextChannel(TextChannel textChannel) {
+        this.textChannel = textChannel;
     }
 
     public Guild getGuild() {
         return guild;
     }
 
+    public void setGuild(Guild guild) {
+        this.guild = guild;
+    }
+
     public User getAuthor() {
         return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public Member getMember() {
         return member;
     }
 
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
     public String getText() {
         return text;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public HashSet<Flag> getFlags() {
         return flags;
+    }
+
+    public void addParam(Flag flag) {
+        flags.add(flag);
+    }
+
+    public void setFlags(HashSet<Flag> flags) {
+        this.flags = flags;
     }
 
     public String getResult() {
@@ -87,5 +127,9 @@ public class ExecutionInstance {
 
     public boolean isShouldReply() {
         return shouldReply;
+    }
+
+    public void setShouldReply(boolean shouldReply) {
+        this.shouldReply = shouldReply;
     }
 }
