@@ -3,11 +3,14 @@ package com.lisadevelopment.lisa.commands;
 import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.Config;
 import com.lisadevelopment.lisa.ExecutionInstance;
+import com.lisadevelopment.lisa.utils.DiscordUtils;
+import com.lisadevelopment.lisa.utils.StringUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.time.Instant;
+import java.util.HashSet;
 
 public abstract class Command {
 
@@ -36,10 +39,45 @@ public abstract class Command {
     }
 
     public boolean treatHeader(ExecutionInstance instance) {
+        if (flags.length == 0)
+            return true;
+        // Flags from commands higher in the message
+        HashSet<Flag> commandFlags = instance.getFlags();
+        // Flags from this command's header (plus the prefix+command in the first index)
+        String[] headerFlags = StringUtils.firstWord(instance.getText()).split(listener.getFlagSeparator());
+        if (commandFlags.isEmpty() && headerFlags.length <= 1)
+            return true;
+        int i;
+        for (i = 1; i < headerFlags.length; i++) {
+            Flag flag = findFlag(headerFlags[i]);
+            if (flag == null)
+                continue;
+            if (flag.equals(listener.getIgnoreParam())) {
+                instance.setResult(instance.getText());
+                return false;
+            }
+            if (instance.getFlags().contains(flag))
+                continue;
+            commandFlags.add(flag);
+        }
+        boolean chained = commandFlags.contains(listener.getChainedParam());
+        if (commandFlags.contains(listener.getDeleteParam()) && !chained)
+            DiscordUtils.tryDelete(instance.getEvent().getMessage());
+        //TODO silence flag and chaining flag
         return true;
     }
 
     public abstract void treat(ExecutionInstance instance);
+
+    public Flag findFlag(String flag) {
+        if (flags == null)
+            return null;
+        int i;
+        for (i = 0; i < flags.length; i++)
+            if (flags[i].isFlag(flag))
+                return flags[i];
+        return null;
+    }
 
     public boolean isCommand(String text) {
         if (name.equalsIgnoreCase(text))

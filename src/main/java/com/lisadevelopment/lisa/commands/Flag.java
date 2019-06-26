@@ -1,10 +1,10 @@
 package com.lisadevelopment.lisa.commands;
 
-public abstract class Flag {
+public class Flag {
 
-    protected String name;
-    protected String description;
-    protected String[] aliases;
+    private String name;
+    private String description;
+    private String[] aliases;
 
     public Flag(String name, String description, String[] aliases) {
         this.name = name;
