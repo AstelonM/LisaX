@@ -3,6 +3,7 @@ package com.lisadevelopment.lisa;
 import com.lisadevelopment.lisa.commands.Command;
 import com.lisadevelopment.lisa.commands.Flag;
 import com.lisadevelopment.lisa.commands.NullCommand;
+import com.lisadevelopment.lisa.utils.StringUtils;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -59,6 +60,17 @@ public class ChatListener implements EventListener, CommandHolder {
         User author = event.getAuthor();
         if (author.isBot() || event.isWebhookMessage())
             return;
+        String text = event.getMessage().getContentRaw();
+        if (!text.startsWith(prefix))
+            return;
+        text = text.substring(prefix.length());
+        if (text.trim().isEmpty())
+            return;
+        text = StringUtils.firstWord(text);
+        String commandName = StringUtils.firstWord(text, flagSeparator);
+        Command command = findFirstCommand(commandName);
+        if (command != null)
+            command.execute(event, commandName);
     }
 
     @Override

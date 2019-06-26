@@ -1,5 +1,6 @@
 package com.lisadevelopment.lisa;
 
+import com.lisadevelopment.lisa.commands.botinfo.BotInfoCommands;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -10,7 +11,7 @@ public class Lisa {
     public static void main(String[] args) throws LoginException, InterruptedException {
         JDA jda = new JDABuilder(Config.TOKEN).build().awaitReady();
         ChatListener listener = new ChatListener(jda);
-
+        listener.addCommand(new BotInfoCommands(listener));
         jda.addEventListener(listener);
     }
 }
