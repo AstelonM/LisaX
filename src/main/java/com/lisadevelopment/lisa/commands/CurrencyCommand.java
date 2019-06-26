@@ -3,9 +3,9 @@ package com.lisadevelopment.lisa.commands;
 import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.ExecutionInstance;
 
-public class CurrencyCommad extends Command
+public class CurrencyCommand extends Command
 {
-    public CurrencyCommad(ChatListener listener) {
+    public CurrencyCommand(ChatListener listener) {
         super(listener);
         name = "currency";
         description = "Get the value of a currency or convert between currencies";
@@ -15,6 +15,6 @@ public class CurrencyCommad extends Command
     }
     @Override
     public void treat(ExecutionInstance instance) {
-        instance.get
+
     }
 }
