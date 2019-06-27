@@ -19,7 +19,7 @@ public class EmbedDissect extends Command {
     EmbedDissect(ChatListener listener){
         super(listener);
         this.name = "embedDissect";
-        this.description = "Get values from an embed message.";
+        this.description = "Get raw text from an embed message for an easy copy-paste. Copies discord formats too.";
         this.usage = listener.getPrefix() + "ed <messageID> <title|description|footer|footerImage|image|timestamp|author|authorImage|color|fieldName|fieldValue> [fieldIndex]";
         this.aliases = new String[] { "ed", "embedD", "eDissect", "embedContent", "getEmbedContent", "ec" };
         this.examples = listener.getPrefix() + "ed 592795299697917962 description";
@@ -115,7 +115,7 @@ public class EmbedDissect extends Command {
             sendMessage(instance, "❌ | That embed does not seem to have a title... \uD83E\uDD14");
             return;
         }
-        sendMessage(instance, "✅ | **Here you go:**\n"+embed.getTitle());
+        sendMessage(instance, "```"+embed.getTitle()+"```");
    }
 
    private void sendDescription(){
@@ -134,7 +134,7 @@ public class EmbedDissect extends Command {
            sendMessage(instance, "❌ | I did find a footer in that embed, but apparently it has no text. \uD83E\uDD14");
            return;
        }
-       sendMessage(instance, "✅ | **Here you go:**\n"+embed.getFooter().getText());
+       sendMessage(instance, "```"+embed.getFooter().getText()+"```");
    }
 
    private void sendFooterImg(){
@@ -145,7 +145,7 @@ public class EmbedDissect extends Command {
            sendMessage(instance, "❌ | No images in that footer... \uD83E\uDD14");
            return;
        }
-       sendMessage(instance, "✅ | **Url:** "+embed.getFooter().getIconUrl()+"\n**Image:**");
+       sendMessage(instance, embed.getFooter().getIconUrl());
    }
 
    private void sendImage(){
@@ -153,7 +153,7 @@ public class EmbedDissect extends Command {
             sendMessage(instance, "❌ | That embed has no image I suppose... \uD83E\uDD14");
             return;
         }
-        sendMessage(instance, "✅ | **Url:** "+embed.getImage().getUrl()+"\n**Image:**");
+        sendMessage(instance, embed.getImage().getUrl());
    }
 
    private void sendTimestamp(){
@@ -166,7 +166,7 @@ public class EmbedDissect extends Command {
        String hours = String.valueOf(embed.getTimestamp().getHour()).toCharArray().length == 2 ? String.valueOf(embed.getTimestamp().getHour()) : "0"+embed.getTimestamp().getHour();
        String minutes = String.valueOf(embed.getTimestamp().getMinute()).toCharArray().length == 2 ? String.valueOf(embed.getTimestamp().getMinute()) : "0"+embed.getTimestamp().getMinute();
        String seconds = String.valueOf(embed.getTimestamp().getSecond()).toCharArray().length == 2 ? String.valueOf(embed.getTimestamp().getSecond()) : "0"+embed.getTimestamp().getSecond();
-       sendMessage(instance, "✅ | **Here you go:**\n```Date: "+timestamp.getDayOfWeek()+" the "+ timestamp.getDayOfMonth() + " of " + timestamp.getMonth() + ", of " + timestamp.getYear() + ".\nTime: " + hours + ":" + minutes + ":" + seconds + " GMT```");
+       sendMessage(instance, "```Date: "+timestamp.getDayOfWeek()+" the "+ timestamp.getDayOfMonth() + " of " + timestamp.getMonth() + ", of " + timestamp.getYear() + ".\nTime: " + hours + ":" + minutes + ":" + seconds + " GMT\nRaw: "+embed.getTimestamp()+"```");
    }
 
    private void sendAuthor(){
@@ -177,7 +177,7 @@ public class EmbedDissect extends Command {
             sendMessage(instance, "❌ | There's an author but no name... Interesting? Perhaps try `authorImage`.");
             return;
         }
-        sendMessage(instance, "✅ | **Here's the author:**\n```"+embed.getAuthor().getName()+"```");
+        sendMessage(instance, "```"+embed.getAuthor().getName()+"```");
    }
 
    private void sendAuthorImage(){
@@ -188,7 +188,7 @@ public class EmbedDissect extends Command {
            sendMessage(instance, "❌ | There's no image in the author part. Hmm \uD83E\uDD14");
            return;
        }
-       sendMessage(instance, "✅ | **Here's the URL:** "+embed.getAuthor().getIconUrl()+"\n**Image:**");
+       sendMessage(instance, embed.getAuthor().getIconUrl());
    }
 
    private void sendColor(){
@@ -198,18 +198,17 @@ public class EmbedDissect extends Command {
            sendMessage(instance, "❌ | Something went wrong while creating the image containing the color. **Here's the color HEX:** "+hex);
            return;
        }
-       sendMessage(instance,"✅ | **HEX:** "+hex);
-       instance.getChannel().sendFile(imageBytes,"Color.png").queue();
+       instance.getChannel().sendMessage("**HEX:** "+hex).addFile(imageBytes,"color.png").queue();
    }
 
     private void sendFieldNames(){
         if(badVerifyFieldUsage()) return;
-        sendMessage(instance,"✅ | Field #"+args[3]+" name: "+embed.getFields().get(Integer.parseInt(args[3])-1).getName());
+        sendMessage(instance,"```"+embed.getFields().get(Integer.parseInt(args[3])-1).getName()+"```");
     }
 
    private void sendFieldValues(){
         if(badVerifyFieldUsage()) return;
-        sendMessage(instance,"✅ | Field #"+args[3]+" value: "+embed.getFields().get(Integer.parseInt(args[3])-1).getValue());
+        sendMessage(instance,"```"+embed.getFields().get(Integer.parseInt(args[3])-1).getValue()+"```");
    }
 
    private boolean badVerifyFieldUsage(){
