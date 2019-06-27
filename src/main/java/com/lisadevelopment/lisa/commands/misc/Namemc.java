@@ -4,7 +4,7 @@ import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.ExecutionInstance;
 import com.lisadevelopment.lisa.commands.Command;
 
-public class Namemc extends Command {
+public class Namemc extends Command { //TODO someone finish this
     Namemc(ChatListener listener) {
         super(listener);
         name = "namemc";
