@@ -1,7 +1,5 @@
 # IntelliJ files
-.idea/misc.xml
-.idea/workspace.xml
-.idea/uiDesigner.xml
+.idea
 .gradle
 build/
 

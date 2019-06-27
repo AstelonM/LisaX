@@ -1,10 +1,11 @@
-package com.lisadevelopment.lisa.commands;
+package com.lisadevelopment.lisa.commands.misc;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.Config;
 import com.lisadevelopment.lisa.ExecutionInstance;
+import com.lisadevelopment.lisa.commands.Command;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import org.jsoup.Jsoup;
 
@@ -13,8 +14,7 @@ import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Date;
 
-public class Currency extends Command
-{
+public class Currency extends Command {
     public Currency(ChatListener listener) {
         super(listener);
         this.name = "currency";

@@ -2,9 +2,10 @@ package com.lisadevelopment.lisa;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.lisadevelopment.lisa.commands.Currency;
 import com.lisadevelopment.lisa.commands.botinfo.BotInfoCommands;
 import com.lisadevelopment.lisa.commands.guildinfo.GuildInfoCommands;
+import com.lisadevelopment.lisa.commands.misc.Currency;
+import com.lisadevelopment.lisa.commands.misc.MiscCommands;
 import com.lisadevelopment.lisa.commands.user.UserCommands;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -31,7 +32,7 @@ public class Lisa {
         listener.addCommand(new BotInfoCommands(listener));
         listener.addCommand(new GuildInfoCommands(listener));
         listener.addCommand(new UserCommands(listener));
-        listener.addCommand(new Currency(listener));
+        listener.addCommand(new MiscCommands(listener));
         jda.addEventListener(listener);
         //Initial currency JSON
         Config.currencyJSON = (JsonObject) new JsonParser().parse(Currency.getCurrencyJSON(""));
