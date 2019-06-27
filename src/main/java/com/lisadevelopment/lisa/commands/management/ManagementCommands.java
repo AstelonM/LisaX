@@ -12,6 +12,7 @@ public class ManagementCommands extends CommandGroup {
         description = "Commands for managing users of a guild.";
         addCommand(new GiveRole(listener));
         addCommand(new TakeRole(listener));
+        addCommand(new ChangeServerRegion(listener));
     }
 
     @Override
