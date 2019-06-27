@@ -13,6 +13,9 @@ public class ManagementCommands extends CommandGroup {
         addCommand(new GiveRole(listener));
         addCommand(new TakeRole(listener));
         addCommand(new ChangeServerRegion(listener));
+        addCommand(new ListPublicRoles(listener));
+        addCommand(new SetPublicRole(listener));
+        addCommand(new ToggleNicknameEnforce(listener));
     }
 
     @Override

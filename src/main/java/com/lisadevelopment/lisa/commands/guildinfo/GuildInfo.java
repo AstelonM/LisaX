@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.entities.*;
 import java.awt.*;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class GuildInfo extends Command {
