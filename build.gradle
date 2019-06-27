@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    implementation ('net.dv8tion:JDA:4.BETA.0_10') {
+    implementation ('net.dv8tion:JDA:4.BETA.0_12') {
         exclude module: 'opus-java'
     }
     implementation 'com.google.code.gson:gson:2.8.5'

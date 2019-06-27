@@ -14,6 +14,7 @@ public class GuildInfoCommands extends CommandGroup {
         addCommand(new CountMembersByRole(listener));
         addCommand(new EmojiImage(listener));
         addCommand(new EmojiList(listener));
+        addCommand(new GetColor(listener));
         addCommand(new GetPermissions(listener));
         addCommand(new RoleId(listener));
         addCommand(new RoleMembers(listener));
