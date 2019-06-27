@@ -1,24 +1,17 @@
-package com.lisadevelopment.lisa.commands.guildinfo;
+package com.lisadevelopment.lisa.commands.management;
 
 import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.ExecutionInstance;
 import com.lisadevelopment.lisa.commands.CommandGroup;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class GuildInfoCommands extends CommandGroup {
-
-    public GuildInfoCommands(ChatListener listener) {
+public class ManagementCommands extends CommandGroup {
+    public ManagementCommands(ChatListener listener) {
         super(listener);
-        name = "GuildInfoCommands";
-        description = "Commands for getting info about a guild.";
-        addCommand(new CountMembersByRole(listener));
-        addCommand(new EmojiImage(listener));
-        addCommand(new EmojiList(listener));
-        addCommand(new GetColor(listener));
-        addCommand(new GetPermissions(listener));
-        addCommand(new RoleId(listener));
-        addCommand(new RoleMembers(listener));
-        addCommand(new GuildInfo(listener));
+        name = "ManagementCommands";
+        description = "Commands for managing users of a guild.";
+        addCommand(new GiveRole(listener));
+        addCommand(new TakeRole(listener));
     }
 
     @Override

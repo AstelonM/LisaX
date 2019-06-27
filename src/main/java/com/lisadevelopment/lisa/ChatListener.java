@@ -4,6 +4,8 @@ import com.lisadevelopment.lisa.commands.Command;
 import com.lisadevelopment.lisa.commands.Flag;
 import com.lisadevelopment.lisa.commands.NullCommand;
 import com.lisadevelopment.lisa.utils.StringUtils;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 public class ChatListener implements EventListener, CommandHolder {
 
     private JDA jda;
+    private MongoDatabase db;
     private String prefix = "//";
     private String flagSeparator = "-";
     private CommandHolder commands;
@@ -44,8 +47,9 @@ public class ChatListener implements EventListener, CommandHolder {
             new String[] { "ig" }
     );
 
-    public ChatListener(JDA jda) {
+    public ChatListener(JDA jda, MongoClient mongoClient) {
         this.jda = jda;
+        this.db = mongoClient.getDatabase("lisa");
         commands = new CommandHolderImpl();
         nullCommand = new NullCommand(this);
     }
@@ -111,6 +115,8 @@ public class ChatListener implements EventListener, CommandHolder {
     public JDA getJda() {
         return jda;
     }
+
+    public MongoDatabase getDb() { return db; }
 
     public String getPrefix() {
         return prefix;
