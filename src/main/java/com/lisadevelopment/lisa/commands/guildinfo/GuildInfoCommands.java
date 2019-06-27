@@ -19,6 +19,7 @@ public class GuildInfoCommands extends CommandGroup {
         addCommand(new RoleId(listener));
         addCommand(new RoleMembers(listener));
         addCommand(new GuildInfo(listener));
+        addCommand(new FirstMessage(listener));
     }
 
     @Override
