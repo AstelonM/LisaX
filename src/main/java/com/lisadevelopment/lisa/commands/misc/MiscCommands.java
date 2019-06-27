@@ -10,5 +10,6 @@ public class MiscCommands extends CommandGroup {
         description = "Group of commands providing miscellaneous utilities.";
         addCommand(new Namemc(listener));
         addCommand(new Currency(listener));
+        addCommand(new EmbedDissect(listener));
     }
 }
