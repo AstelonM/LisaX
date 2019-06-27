@@ -41,7 +41,7 @@ public class UserInfo extends Command {
                 .collect(Collectors.joining(", "));
         return new EmbedBuilder()
                 .setAuthor("User Info", null, user.getEffectiveAvatarUrl())
-                .setColor(Config.BOT_COLOR)
+                .setColor(member.getColor())
                 .setTimestamp(Instant.now())
                 .setThumbnail(user.getEffectiveAvatarUrl())
                 .setDescription(user.getAsMention() + " **(" + user.getName() + "#" + user.getDiscriminator() + ")**")
