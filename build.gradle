@@ -22,4 +22,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     compile 'org.mongodb:mongodb-driver-sync:3.10.2'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    
+    //for currency converter
+    implementation 'com.google.code.gson:gson:2.8.5'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.8.3'
+
 }

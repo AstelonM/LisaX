@@ -18,6 +18,7 @@ public class Lisa {
         FileReader fileReader = new FileReader("config.properties");
         properties.load(fileReader);
         String token = properties.getProperty("token");
+        Config.fixerKey = properties.getProperty("fixerKey");
         fileReader.close();
         properties.clear();
 
@@ -27,5 +28,6 @@ public class Lisa {
         listener.addCommand(new GuildInfoCommands(listener));
         listener.addCommand(new UserCommands(listener));
         jda.addEventListener(listener);
+
     }
 }

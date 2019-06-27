@@ -1,7 +1,11 @@
 package com.lisadevelopment.lisa.commands;
 
 import com.lisadevelopment.lisa.ChatListener;
+import com.lisadevelopment.lisa.Config;
 import com.lisadevelopment.lisa.ExecutionInstance;
+import org.jsoup.Jsoup;
+
+import java.io.IOException;
 
 public class Currency extends Command
 {
@@ -16,5 +20,13 @@ public class Currency extends Command
     @Override
     public void treat(ExecutionInstance instance) {
 
+    }
+    public static String getCurrencyJSON(String current)  {
+        try {
+            return Jsoup.connect("http://data.fixer.io/api/latest?access_key="+ Config.fixerKey).ignoreContentType(true).execute().body();
+        }catch(IOException e)
+        {
+            return current;
+        }
     }
 }
