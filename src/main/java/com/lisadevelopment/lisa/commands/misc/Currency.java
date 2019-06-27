@@ -15,7 +15,7 @@ import java.time.Instant;
 import java.util.Date;
 
 public class Currency extends Command {
-    public Currency(ChatListener listener) {
+    Currency(ChatListener listener) {
         super(listener);
         this.name = "currency";
         this.description = "Get the value of a currency or convert between currencies";

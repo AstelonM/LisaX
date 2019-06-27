@@ -7,14 +7,14 @@ import com.lisadevelopment.lisa.commands.Command;
 public class Namemc extends Command {
     Namemc(ChatListener listener) {
         super(listener);
-        name = "currency";
-        description = "Get the value of a currency or convert between currencies";
-        usage = listener.getPrefix() + "value <amount> <currency> to <currency2>";
-        aliases = new String[] { "money", "value", "$" };
-        examples = listener.getPrefix() + "value 30 usd to inr";
+        name = "namemc";
+        description = "Get details about a Minecraft account.";
+        usage = listener.getPrefix() + "namemc <username>";
+        aliases = new String[] { "nmc", "minecraft" };
+        examples = listener.getPrefix() + "namemc Astelon";
     }
     @Override
     public void treat(ExecutionInstance instance) {
-        sendMessage(instance, "ok");
+        sendMessage(instance, "**Skin and name changes for " + instance.getText().split(" ")[1] + ":**");
     }
 }
