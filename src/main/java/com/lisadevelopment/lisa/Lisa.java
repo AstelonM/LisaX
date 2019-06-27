@@ -32,7 +32,7 @@ public class Lisa {
         listener.addCommand(new MiscCommands(listener));
         jda.addEventListener(listener);
         //Initial currency JSON
-        Config.currencyJSON = (JsonObject) new JsonParser().parse(Currency.getCurrencyJSON(""));
-        Config.lastUpdatedCurrency = Date.from(Instant.now());
+        Currency.currencyJSON = (JsonObject) new JsonParser().parse(Currency.getCurrencyJSON(""));
+        Currency.lastUpdatedCurrency = Date.from(Instant.now());
     }
 }

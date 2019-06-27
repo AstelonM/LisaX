@@ -15,6 +15,10 @@ import java.time.Instant;
 import java.util.Date;
 
 public class Currency extends Command {
+
+    public static Date lastUpdatedCurrency = null;
+    public static JsonObject currencyJSON = null;
+
     Currency(ChatListener listener) {
         super(listener);
         this.name = "currency";
@@ -25,9 +29,9 @@ public class Currency extends Command {
     }
     @Override
     public void treat(ExecutionInstance instance) {
-        if (Config.lastUpdatedCurrency.getDate() != Date.from(Instant.now()).getDate()) {
-            Config.currencyJSON = (JsonObject) new JsonParser().parse(Currency.getCurrencyJSON(Config.currencyJSON.toString()));
-            Config.lastUpdatedCurrency = Date.from(Instant.now());
+        if (lastUpdatedCurrency.getDate() != Date.from(Instant.now()).getDate()) {
+            currencyJSON = (JsonObject) new JsonParser().parse(Currency.getCurrencyJSON(currencyJSON.toString()));
+            lastUpdatedCurrency = Date.from(Instant.now());
         }
         MessageChannel channel = instance.getChannel();
         double amount;
@@ -36,7 +40,7 @@ public class Currency extends Command {
         try {
             String[] args = instance.getText().substring(instance.getText().indexOf(' ') + 1).split(" ");
             if (args.length == 0) {
-                throw new Exception("Usage: `" + this.usage + "`");
+                throw new Exception("Usage: " + this.usage);
             }
             if (Character.isDigit(args[0].charAt(0))) {
                 switch (args.length)
@@ -64,10 +68,12 @@ public class Currency extends Command {
                     amount = 1;
                     currencyFrom = args[0];
                     currencyTo = (args[0].equalsIgnoreCase("USD"))?"EUR":"USD";
-                }
-                else
-                {
-                    throw new Exception("Usage: `"+this.usage+"`");
+                } else if (args.length == 2) {
+                    amount = 1;
+                    currencyFrom = args[0];
+                    currencyTo = args[1];
+                } else {
+                    throw new Exception("Usage: " + this.usage + "");
                 }
             }
             double result = parseJSON(amount, currencyFrom.toUpperCase(), currencyTo.toUpperCase());
@@ -91,7 +97,7 @@ public class Currency extends Command {
     }
 
     private double parseJSON(double amount, String currencyFrom, String currencyTo) {
-        JsonObject rates = Config.currencyJSON.getAsJsonObject("rates");
+        JsonObject rates = currencyJSON.getAsJsonObject("rates");
         //get rates in EUR
         double fromEUR = rates.get(currencyFrom.substring(0, 3)).getAsDouble();
         double toEUR = rates.get(currencyTo.substring(0, 3)).getAsDouble();
