@@ -39,10 +39,9 @@ public class UserInfo extends Command {
                 .collect(Collectors.joining(", "));
         String permissionString = member.getPermissions().stream().map(Permission::getName)
                 .collect(Collectors.joining(", "));
-        Color color = member.getColor() == null ? Config.BOT_COLOR : member.getColor();
         return new EmbedBuilder()
                 .setAuthor("User Info", null, user.getEffectiveAvatarUrl())
-                .setColor(color)
+                .setColor(Color.decode("random"))
                 .setTimestamp(Instant.now())
                 .setThumbnail(user.getEffectiveAvatarUrl())
                 .setDescription(user.getAsMention() + " **(" + user.getName() + "#" + user.getDiscriminator() + ")**")
