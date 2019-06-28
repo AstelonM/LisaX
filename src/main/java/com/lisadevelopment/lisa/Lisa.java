@@ -12,6 +12,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class Lisa {
         listener.addCommand(new UserCommands(listener));
         listener.addCommand(new MiscCommands(listener));
         listener.addCommand(new ManagementCommands(listener));
+        jda.getPresence().setPresence(Activity.watching("for commands | " + listener.getPrefix() + "help"), false);
         jda.addEventListener(listener);
         jda.addEventListener(new NameListener(jda));
         //Initial currency JSON
