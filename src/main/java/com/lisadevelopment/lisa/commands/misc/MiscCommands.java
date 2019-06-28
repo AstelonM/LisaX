@@ -12,5 +12,6 @@ public class MiscCommands extends CommandGroup {
         addCommand(new Namemc(listener));
         addCommand(new Currency(listener));
         addCommand(new EmbedDissect(listener));
+        addCommand(new Google(listener));
     }
 }
