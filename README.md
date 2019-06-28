@@ -10,19 +10,19 @@ For example: `//ping`
 
 **Commands:** These are the commands you can use.
 
-BotInfoCommands:
+Bot Info Commands:
 `commandCount, ping, list`
 
-GuildInfoCommands:
+Guild Info Commands:
 `countMembersByRole, emojiImage, emojiList, getColourCode, getPermissions, roleId, roleMembers, guildInfo, firstMessage`
 
-UserCommands:
+User Commands:
 `avatar, getDiscriminator, getEffectiveName, getNickname, id, getUsername, getRoles, nickname, userInfo`
 
 MiscCommands:
 `charCount, namemc, currency, embedDissect`
 
-ManagementCommands:
+Management Commands:
 `giveRole, takeRole, changeServerRegion, listPublicRoles, setPublicRole, toggleNicknameEnforce`
 
 Additionally, you can use `//help <command>` for more help on a command.
