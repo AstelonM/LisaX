@@ -19,7 +19,7 @@ Guild Info Commands:
 User Commands:
 `avatar, getDiscriminator, getEffectiveName, getNickname, id, getUsername, getRoles, nickname, userInfo`
 
-MiscCommands:
+Miscallaneous Commands:
 `charCount, namemc, currency, embedDissect`
 
 Management Commands:
