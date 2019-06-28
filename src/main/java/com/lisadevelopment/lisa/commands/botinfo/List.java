@@ -49,7 +49,7 @@ public class List extends Command {
                 author.openPrivateChannel().queue(
                         privateChannel ->  {
                             sendMessage(instance, privateChannel, getCommandList());
-                            sendMessage(instance, author.getAsMention() + " the command list was sent to your pms.");
+                            sendMessage(instance, author.getAsMention() + " the command list was sent to your DMs.");
                         });
             }
         } else {
