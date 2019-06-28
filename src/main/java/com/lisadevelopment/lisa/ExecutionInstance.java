@@ -47,6 +47,10 @@ public class ExecutionInstance {
         shouldReply = true;
     }
 
+    public String[] getArgs() {
+        return this.getText().substring(this.getText().indexOf(' ') + 1).split(" ");
+    }
+
     public MessageReceivedEvent getEvent() {
         return event;
     }
