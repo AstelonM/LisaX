@@ -16,6 +16,7 @@ import net.dv8tion.jda.api.entities.Activity;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Properties;
@@ -24,7 +25,9 @@ public class Lisa {
 
     public static void main(String[] args) throws LoginException, InterruptedException, IOException {
         Properties properties = new Properties();
-        properties.load(Lisa.class.getClassLoader().getResourceAsStream("config.properties"));
+        InputStream config = Lisa.class.getClassLoader().getResourceAsStream("config.properties");
+        if (config == null) throw new LoginException("config.properties does not exist! Unable to get credentials.");
+        properties.load(config);
         String token = properties.getProperty("token");
         Config.fixerKey = properties.getProperty("fixerKey");
         Config.MONGO_URL = properties.getProperty("mongoURL");
@@ -40,7 +43,7 @@ public class Lisa {
         listener.addCommand(new ManagementCommands(listener));
         jda.getPresence().setPresence(Activity.watching("for commands | " + listener.getPrefix() + "help"), false);
         jda.addEventListener(listener);
-        jda.addEventListener(new NameListener(jda));
+        jda.addEventListener(new NameListener(jda, mongoClient.getDatabase("lisa")));
         //Initial currency JSON
         Currency.currencyJSON = (JsonObject) new JsonParser().parse(Currency.getCurrencyJSON(""));
         Currency.lastUpdatedCurrency = Date.from(Instant.now());

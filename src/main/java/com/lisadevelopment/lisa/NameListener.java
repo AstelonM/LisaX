@@ -1,5 +1,9 @@
 package com.lisadevelopment.lisa;
 
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -7,20 +11,20 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateNameEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
+import org.bson.Document;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Consumer;
 
 public class NameListener implements EventListener {
 
     private JDA jda;
-    private ArrayList<Long> guildIds;
+    private MongoCollection<Document> servers;
 
-    public NameListener(JDA jda) {
+    NameListener(JDA jda, MongoDatabase mongoDatabase) {
         this.jda = jda;
-        guildIds = new ArrayList<>();
+        this.servers = mongoDatabase.getCollection("servers");
     }
 
     @Override
@@ -29,17 +33,22 @@ public class NameListener implements EventListener {
             onUserUpdateName((UserUpdateNameEvent) event);
     }
 
-    public void onUserUpdateName(UserUpdateNameEvent event) {
-        List<Guild> guilds = guildIds.stream().map(jda::getGuildById).collect(Collectors.toList());
+    private void onUserUpdateName(UserUpdateNameEvent event) {
+        FindIterable<Document> servers = this.servers.find(Filters.eq("enforceNicks", true));
+        if (servers.first() == null) return;
         User user = event.getUser();
-        Member member;
-        for (Guild guild: guilds) {
-            member = guild.getMember(user);
+        servers.forEach((Consumer<Document>) document -> {
+            Guild guild = jda.getGuildById(document.getString("id"));
+            if (guild == null) {
+                this.servers.deleteOne(Filters.eq("id", document.getString("id")));
+                return;
+            }
+            Member member = guild.getMember(user);
             if (member != null && guild.getSelfMember().canInteract(member) && member.getNickname() == null) {
                 try {
                     guild.modifyNickname(member, event.getOldName()).queue();
                 } catch (Exception ignore) {}
             }
-        }
+        });
     }
 }
