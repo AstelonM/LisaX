@@ -27,23 +27,28 @@ public class ChatListener implements EventListener, CommandHolder {
 
     private NullCommand nullCommand;
 
-    private Flag silentFlag = new Flag("silent",
+    private Flag silentFlag = new Flag(this,
+            "silent",
             "No response message will be sent.",
             new String[] { "s" }
     );
-    private Flag deleteFlag = new Flag("delete",
+    private Flag deleteFlag = new Flag(this,
+            "delete",
             "The command will be deleted if possible.",
             new String[] { "del", "d" }
     );
-    private Flag chainingFlag = new Flag("chaining",
+    private Flag chainingFlag = new Flag(this,
+            "chaining",
             "Executes chained commands.",
             new String[] { "ch", "appending", "ap" }
     );
-    private Flag chainedFlag = new Flag("chained",
+    private Flag chainedFlag = new Flag(this,
+            "chained",
             "Marks that a command is chained.",
             new String[0]
     );
-    private Flag ignoreFlag = new Flag("ignore",
+    private Flag ignoreFlag = new Flag(this,
+            "ignore",
             "The command won't be executed (it will still count against limits).",
             new String[] { "ig" }
     );

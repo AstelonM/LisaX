@@ -107,7 +107,8 @@ public abstract class Command {
         else
             result.addField("Name and aliases:", formatNamesToString(), false);
         result.addField("Description:", description, false)
-                .addField("Usage:", usage, false);
+                .addField("Usage:", usage, false)
+                .addField("Examples:", examples, false);
         if (flags != null && flags.length > 0)
             result.addField("Flags:", formatFlagsToString(), false);
         return result.build();

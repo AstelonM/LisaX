@@ -10,7 +10,8 @@ public class BotInfoCommands extends CommandGroup {
         name = "BotInfoCommands";
         description = "Group of commands providing information about the bot.";
         addCommand(new CommandCount(listener));
-        addCommand(new Ping(listener));
+        addCommand(new Help(listener));
         addCommand(new List(listener));
+        addCommand(new Ping(listener));
     }
 }
