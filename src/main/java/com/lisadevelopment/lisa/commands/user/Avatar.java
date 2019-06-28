@@ -46,7 +46,7 @@ public class Avatar extends Command {
             target = member.getUser();
         }
         sendMessage(instance, new EmbedBuilder()
-                .setColor(Config.BOT_COLOR)
+                .setColor(member.getColor())
                 .setAuthor(target.getName(), null, target.getEffectiveAvatarUrl())
                 .setImage(target.getEffectiveAvatarUrl() + "?size=2048")
                 .build());
