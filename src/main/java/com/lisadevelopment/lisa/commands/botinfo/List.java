@@ -47,7 +47,10 @@ public class List extends Command {
         if (!text.contains(" ")) {
             if (instance.isShouldReply()) {
                 author.openPrivateChannel().queue(
-                        privateChannel -> sendMessage(instance, privateChannel, getCommandList()));
+                        privateChannel ->  {
+                            sendMessage(instance, privateChannel, getCommandList());
+                            sendMessage(instance, author.getAsMention() + " the command list was sent to your pms.");
+                        });
             }
         } else {
             text = text.substring(text.indexOf(" ")).trim();
