@@ -12,20 +12,21 @@ For example:
 
 **Commands:** These are the commands you can use.
 
+
 __Bot Info Commands:__
-commandCount, ping, list
+`commandCount, ping, list`
 
 __Guild Info Commands:__
-countMembersByRole, emojiImage, emojiList, getColourCode, getPermissions, roleId, roleMembers, guildInfo, firstMessage
+`countMembersByRole, emojiImage, emojiList, getColourCode, getPermissions, roleId, roleMembers, guildInfo, firstMessage`
 
 __User Commands:__
-avatar, getDiscriminator, getEffectiveName, getNickname, id, getUsername, getRoles, nickname, userInfo
+`avatar, getDiscriminator, getEffectiveName, getNickname, id, getUsername, getRoles, nickname, userInfo`
 
 __Miscallaneous Commands:__
-charCount, namemc, currency, embedDissect
+`charCount, namemc, currency, embedDissect`
 
 __Management Commands:__
-giveRole, takeRole, changeServerRegion, listPublicRoles, setPublicRole, toggleNicknameEnforce
+`giveRole, takeRole, changeServerRegion, listPublicRoles, setPublicRole, toggleNicknameEnforce`
 
 Additionally, you can use //help <command> for more help on a command.
 
