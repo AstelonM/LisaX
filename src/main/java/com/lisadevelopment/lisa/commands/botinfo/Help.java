@@ -20,6 +20,20 @@ public class Help extends Command {
         };
     }
 
+        private MessageEmbed getMemberInfo(Member member) { //TODO
+        String roleString = member.getRoles().stream().map(IMentionable::getAsMention)
+                .collect(Collectors.joining(", "));
+        String permissionString = member.getPermissions().stream().map(Permission::getName)
+                .collect(Collectors.joining(", "));
+        return new EmbedBuilder()
+                .setAuthor("LisaX", null, user.getEffectiveAvatarUrl())//change
+                .setColor(member.getColor())
+                .setTimestamp(Instant.now())
+                .setThumbnail(user.getEffectiveAvatarUrl())//change
+                .setDescription("**LisaX** is a bot made for Discord Hack-Week 2019. The name is the initial letters of the usernames of the developers that worked on the bot It has a variety of commands all based around productivity. Type in `//list` for the list of commands. The command behavior can be customized using flags using the format: `//commandName-flag1-flag2`. You can use the `-ap` flag at the first command to run multiple commands in the same line, from right to left, with each new command using the result of the previous one in its input. The list of flags is `-s, -ig, -del/-d, -ap/-ch/-appending` which stand for `silent, ignore, delete, appending` respectively.")
+                .build();
+    }
+    
     @Override
     public void treat(ExecutionInstance instance) {
         String text = instance.getText();
