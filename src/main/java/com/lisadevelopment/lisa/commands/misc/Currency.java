@@ -11,6 +11,7 @@ import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.Instant;
 import java.util.Date;
 
@@ -77,7 +78,10 @@ public class Currency extends Command {
                 }
             }
             double result = parseJSON(amount, currencyFrom.toUpperCase(), currencyTo.toUpperCase());
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+            symbols.setDecimalSeparator('.');
             DecimalFormat df = new DecimalFormat("###.##");
+            df.setDecimalFormatSymbols(symbols);
             channel.sendMessage(df.format(amount) + " **" + currencyFrom.toUpperCase() + "** = " + df.format(result) + " **" + currencyTo.toUpperCase() + "**").queue();
         }
         catch (Exception e)
