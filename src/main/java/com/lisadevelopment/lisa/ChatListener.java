@@ -1,6 +1,7 @@
 package com.lisadevelopment.lisa;
 
 import com.lisadevelopment.lisa.commands.Command;
+import com.lisadevelopment.lisa.commands.CommandGroup;
 import com.lisadevelopment.lisa.commands.Flag;
 import com.lisadevelopment.lisa.commands.NullCommand;
 import com.lisadevelopment.lisa.utils.StringUtils;
@@ -77,6 +78,8 @@ public class ChatListener implements EventListener, CommandHolder {
             command.execute(event, commandName);
     }
 
+
+
     @Override
     public void addCommand(Command command) throws IllegalArgumentException {
         commands.addCommand(command);
@@ -110,6 +113,14 @@ public class ChatListener implements EventListener, CommandHolder {
     @Override
     public ArrayList<Command> getCommands() {
         return commands.getCommands();
+    }
+
+    public CommandGroup findCommandGroup(String name) {
+        Command command = findCommand(name);
+        if (!(command instanceof CommandGroup))
+            return null;
+        else
+            return (CommandGroup) command;
     }
 
     public JDA getJda() {
