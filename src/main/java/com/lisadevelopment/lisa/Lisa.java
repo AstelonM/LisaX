@@ -28,6 +28,7 @@ public class Lisa {
         String token = properties.getProperty("token");
         Config.fixerKey = properties.getProperty("fixerKey");
         Config.MONGO_URL = properties.getProperty("mongoURL");
+        Config.CLOUD_VISION_KEY = properties.getProperty("cloudVisionKey");
         properties.clear();
         JDA jda = new JDABuilder(token).build().awaitReady();
         MongoClient mongoClient = MongoClients.create(Config.MONGO_URL);
