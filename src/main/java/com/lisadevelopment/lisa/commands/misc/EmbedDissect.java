@@ -3,6 +3,7 @@ package com.lisadevelopment.lisa.commands.misc;
 import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.ExecutionInstance;
 import com.lisadevelopment.lisa.commands.Command;
+import com.lisadevelopment.lisa.commands.Flag;
 import com.lisadevelopment.lisa.utils.ImageUtils;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.exceptions.ErrorResponseException;
@@ -10,7 +11,7 @@ import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-public class EmbedDissect extends Command {
+public class EmbedDissect extends Command { //TODO needs improving :v
 
     private ExecutionInstance instance;
     private String[] args;
@@ -23,6 +24,11 @@ public class EmbedDissect extends Command {
         this.usage = listener.getPrefix() + "ed <messageID> <title|description|footer|footerImage|image|timestamp|author|authorImage|color|fieldName|fieldValue> [fieldIndex]";
         this.aliases = new String[] { "ed", "embedD", "eDissect", "embedContent", "getEmbedContent", "ec" };
         this.examples = listener.getPrefix() + "ed 592795299697917962 description";
+        flags = new Flag[] {
+                listener.getDeleteFlag(),
+                listener.getChainingFlag(),
+                listener.getIgnoreFlag()
+        };
     }
 
     @Override

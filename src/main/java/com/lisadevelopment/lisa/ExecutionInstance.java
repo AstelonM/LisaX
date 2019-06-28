@@ -48,7 +48,7 @@ public class ExecutionInstance {
     }
 
     public String[] getArgs() {
-        return this.getText().substring(this.getText().indexOf(' ') + 1).split(" ");
+        return text.substring(text.indexOf(" ")).trim().split(" ");
     }
 
     public MessageReceivedEvent getEvent() {

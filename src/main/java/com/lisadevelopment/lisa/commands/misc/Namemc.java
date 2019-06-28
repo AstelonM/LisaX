@@ -8,6 +8,7 @@ import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.Config;
 import com.lisadevelopment.lisa.ExecutionInstance;
 import com.lisadevelopment.lisa.commands.Command;
+import com.lisadevelopment.lisa.commands.Flag;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import org.jsoup.Jsoup;
@@ -22,6 +23,11 @@ public class Namemc extends Command {
         usage = listener.getPrefix() + "namemc <username>";
         aliases = new String[] { "nmc", "minecraft" };
         examples = listener.getPrefix() + "namemc Astelon";
+        flags = new Flag[] {
+                listener.getDeleteFlag(),
+                listener.getChainingFlag(),
+                listener.getIgnoreFlag()
+        };
     }
     @Override
     public void treat(ExecutionInstance instance) {

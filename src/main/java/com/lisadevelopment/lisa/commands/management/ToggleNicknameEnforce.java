@@ -23,7 +23,8 @@ public class ToggleNicknameEnforce extends Command {
         aliases = new String[] {"tne", "toggleNickEnforce", "nickEnforce", "nicknameEnforce"};
         flags = new Flag[] {
                 listener.getDeleteFlag(),
-                listener.getIgnoreFlag()
+                listener.getIgnoreFlag(),
+                listener.getSilentFlag()
         };
     }
 

@@ -13,6 +13,7 @@ public class CharCount extends Command {
         description = "Get the number of characters in a text";
         usage = getPrefix() + "charCount (text)";
         aliases = new String[] { "countChars", "countCharacters", "length", "textLength", "getLength", "getTextLength" };
+        examples = getPrefix() + "charCount abcdefg";
         flags = new Flag[] {
                 listener.getDeleteFlag(),
                 listener.getChainingFlag(),

@@ -6,6 +6,7 @@ import com.lisadevelopment.lisa.ChatListener;
 import com.lisadevelopment.lisa.Config;
 import com.lisadevelopment.lisa.ExecutionInstance;
 import com.lisadevelopment.lisa.commands.Command;
+import com.lisadevelopment.lisa.commands.Flag;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import org.jsoup.Jsoup;
 
@@ -27,6 +28,11 @@ public class Currency extends Command {
         this.usage = listener.getPrefix() + "value <amount> <currency> to <currency2>";
         this.aliases = new String[]{"money", "value", "$", "cur"};
         this.examples = listener.getPrefix() + "value 30 usd to inr";
+        flags = new Flag[] {
+                listener.getDeleteFlag(),
+                listener.getChainingFlag(),
+                listener.getIgnoreFlag()
+        };
     }
     @Override
     public void treat(ExecutionInstance instance) {

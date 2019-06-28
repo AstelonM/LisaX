@@ -24,7 +24,9 @@ public class SetPublicRole extends Command {
         aliases = new String[] {"spr"};
         flags = new Flag[] {
                 listener.getDeleteFlag(),
-                listener.getIgnoreFlag()
+                listener.getIgnoreFlag(),
+                listener.getChainingFlag(),
+                listener.getSilentFlag()
         };
     }
 

@@ -29,7 +29,8 @@ public class TakeRole extends Command {
         flags = new Flag[] {
                 listener.getDeleteFlag(),
                 listener.getChainingFlag(),
-                listener.getIgnoreFlag()
+                listener.getIgnoreFlag(),
+                listener.getSilentFlag()
         };
     }
 
