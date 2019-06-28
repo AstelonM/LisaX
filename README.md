@@ -6,7 +6,7 @@ A discord bot made for Discord Hack-Week 2019 using Java and JDA-4.
 
 **Usage:** The prefix for the bot is: `//`
 
-For example: `//ping`
+For example: ! [] (https://media.discordapp.net/attachments/593145378086584321/594237673171058718/ok.gif)
 
 **Commands:** These are the commands you can use.
 
