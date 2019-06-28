@@ -8,8 +8,8 @@ version = '1.0.0'
 mainClassName = 'com.lisadevelopment.lisa.Lisa'
 compileJava.options.encoding = 'UTF-8'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     jcenter()
