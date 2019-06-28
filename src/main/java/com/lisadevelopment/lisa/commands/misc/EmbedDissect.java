@@ -192,8 +192,12 @@ public class EmbedDissect extends Command {
    }
 
    private void sendColor(){
+        if(embed.getColor() == null){
+            sendMessage(instance,"❌ | That embed has no color.");
+            return;
+        }
        byte[] imageBytes = ImageUtils.createColoredRectangle(200,50,embed.getColor());
-       String hex = "#" + Integer.toHexString(Objects.requireNonNull(embed.getColor()).getRGB()).substring(2);
+       String hex = "#" + Integer.toHexString(embed.getColor().getRGB()).substring(2);
        if(imageBytes == null){
            sendMessage(instance, "❌ | Something went wrong while creating the image containing the color. **Here's the color HEX:** "+hex);
            return;
