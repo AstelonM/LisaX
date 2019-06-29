@@ -6,6 +6,7 @@ import net.dv8tion.jda.internal.JDAImpl;
 import net.dv8tion.jda.internal.entities.EmoteImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -214,6 +215,25 @@ public class GetFromString {
             catch (NumberFormatException ignored) {}
         }
         return emotes;
+    }
+
+    public static HashMap<Emote, Integer> getMentionedGuildEmotesWithCount(Guild guild, String text) {
+        if (text == null || text.isEmpty())
+            return new HashMap<>();
+        HashMap<Emote, Integer> result = new HashMap<>();
+        Matcher matcher = Message.MentionType.EMOTE.getPattern().matcher(text);
+        long id;
+        Emote emote;
+        while (matcher.find()) {
+            try {
+                id = parseSnowflake(matcher.group(2));
+                emote = guild.getEmoteById(id);
+                if (emote == null)
+                    continue;
+                result.merge(emote, 0, Integer::sum);
+            } catch (NumberFormatException ignore) {}
+        }
+        return result;
     }
 
     public static ArrayList<Emote> getEmotes(JDA jda, String text, Format... formats) {
