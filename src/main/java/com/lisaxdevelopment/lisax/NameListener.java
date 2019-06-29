@@ -36,10 +36,10 @@ public class NameListener implements EventListener {
         FindIterable<Document> servers = this.servers.find(Filters.eq("enforceNicks", true));
         if (servers.first() == null) return;
         User user = event.getUser();
-        servers.forEach((Consumer<Document>) document -> {
-            Guild guild = jda.getGuildById(document.getString("id"));
+        servers.forEach((Consumer<Document>) server -> {
+            Guild guild = jda.getGuildById(server.getString("id"));
             if (guild == null) {
-                this.servers.deleteOne(Filters.eq("id", document.getString("id")));
+                this.servers.deleteOne(Filters.eq("id", server.getString("id")));
                 return;
             }
             Member member = guild.getMember(user);

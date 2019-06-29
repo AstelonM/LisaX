@@ -2,6 +2,8 @@
 
 A discord bot made for Discord Hack-Week 2019 using Java and JDA 4. 
 
+[Invite to a test server for the bot: https://discord.gg/ffTFMdk](https://discord.gg/ffTFMdk)
+
 ## Usage and Commands
 
 **Usage:** The prefix for the bot is: //

@@ -42,9 +42,10 @@ public class LisaX {
         listener.addCommand(new UserCommands(listener));
         listener.addCommand(new MiscCommands(listener));
         listener.addCommand(new ManagementCommands(listener));
-        jda.getPresence().setPresence(Activity.watching("for command, run " + listener.getPrefix() + "help"), false);
+        jda.getPresence().setPresence(Activity.watching("for commands, run " + listener.getPrefix() + "help"), false);
         jda.addEventListener(listener);
-        jda.addEventListener(new NameListener(jda, mongoClient.getDatabase("lisa")));
+        // jda.addEventListener(new EmoteListener(mongoClient.getDatabase("lisax")));
+        jda.addEventListener(new NameListener(jda, mongoClient.getDatabase("lisax")));
         //Initial currency JSON
         Currency.currencyJSON = (JsonObject) new JsonParser().parse(Currency.getCurrencyJSON(""));
         Currency.lastUpdatedCurrency = Date.from(Instant.now());

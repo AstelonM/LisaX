@@ -20,6 +20,7 @@ public class UserCommands extends CommandGroup {
         addCommand(new GetRoles(listener));
         addCommand(new Nickname(listener));
         addCommand(new UserInfo(listener));
+        addCommand(new Note(listener));
     }
 
     @Override

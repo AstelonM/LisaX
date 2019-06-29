@@ -11,7 +11,7 @@ public class Config {
     private final String fixerKey;
     private final String cloudVisionKey;
 
-    public Config(Properties properties) {
+    Config(Properties properties) {
         token = properties.getProperty("token");
         fixerKey = properties.getProperty("fixerKey");
         mongoUrl = properties.getProperty("mongoURL");
