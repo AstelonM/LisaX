@@ -3,9 +3,9 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.0.0'
 }
 
-group = 'com.lisadevelopment'
+group = 'com.lisaxdevelopment'
 version = '1.0.0'
-mainClassName = 'com.lisadevelopment.lisa.Lisa'
+mainClassName = 'com.lisaxdevelopment.lisax.LisaX'
 compileJava.options.encoding = 'UTF-8'
 
 sourceCompatibility = 11

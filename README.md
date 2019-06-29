@@ -1,6 +1,6 @@
 # LisaX
 
-A discord bot made for Discord Hack-Week 2019 using Java and JDA-4. 
+A discord bot made for Discord Hack-Week 2019 using Java and JDA 4. 
 
 ## Usage and Commands
 
@@ -14,20 +14,22 @@ For example:
 
 
 __• Bot Info Commands:__
-`commandCount, ping, list`
+`commandCount, help, list, ping`
 
 __• Guild Info Commands:__
-`countMembersByRole, emojiImage, emojiList, getColourCode, getPermissions, roleId, roleMembers, guildInfo, firstMessage`
+`countMembersByRole, emojiImage, emojiList, firstMessage getColourCode, getPermissions, guildInfo, roleId, roleMembers`
+
+__• Management Commands:__
+`addEmote, changeServerRegion, giveRole, listPublicRoles, notify, setPublicRole, takeRole, toggleNicknameEnforce`
+
+__• Miscellaneous Commands:__
+`charCount, currency, embedDissect, namemc, ocr`
 
 __• User Commands:__
 `avatar, getDiscriminator, getEffectiveName, getNickname, id, getUsername, getRoles, nickname, userInfo`
 
-__• Miscallaneous Commands:__
-`charCount, namemc, currency, embedDissect`
-
-__• Management Commands:__
-`giveRole, takeRole, changeServerRegion, listPublicRoles, setPublicRole, toggleNicknameEnforce`
-
 Additionally, you can use //help <command> for more help on a command.
+
+For more information about the bot, use //help.
 
 Depends on Java 11+ ([if you're confused where to get Java 11, use Adopt OpenJDK to download the latest version of Java](https://adoptopenjdk.net/)).
