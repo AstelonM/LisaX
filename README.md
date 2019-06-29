@@ -28,7 +28,7 @@ __• Miscellaneous Commands:__
 `charCount, currency, embedDissect, namemc, ocr`
 
 __• User Commands:__
-`avatar, getDiscriminator, getEffectiveName, getNickname, id, getUsername, getRoles, nickname, userInfo`
+`avatar, getDiscriminator, getEffectiveName, getNickname, id, getUsername, getRoles, nickname, userInfo, note`
 
 Additionally, you can use //help <command> for more help on a command.
 

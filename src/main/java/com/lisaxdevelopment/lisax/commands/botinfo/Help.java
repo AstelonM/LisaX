@@ -12,7 +12,7 @@ import java.time.Instant;
 
 public class Help extends Command {
 
-    public Help(ChatListener listener) {
+    Help(ChatListener listener) {
         super(listener);
         name = "help";
         usage = getPrefix() + "help ((command name)(" + listener.getFlagSeparator() + "flag name))";
@@ -63,7 +63,8 @@ public class Help extends Command {
                     .addField("Other features", "Apart from these, LisaX supports the following features:\n" +
                             "**Name enforcing** - servers that require certain effective names for members can enable this " +
                             "feature to stop users without a nickname from changing their effective name (by giving them " +
-                            "a nickname)\n**Public roles** - the bot can set up roles that can be taken by any member", false)
+                            "a nickname)\n**Public roles** - the bot can set up roles that can be taken by any member" +
+                            "\n**Notes** - Take personal notes. /shrug", false)
                     .build());
         } else {
             text = text.substring(text.indexOf(" ")).trim();
