@@ -1,16 +1,13 @@
 package com.lisadevelopment.lisa.commands.guildinfo;
 
 import com.lisadevelopment.lisa.ChatListener;
+import com.lisadevelopment.lisa.Config;
 import com.lisadevelopment.lisa.ExecutionInstance;
 import com.lisadevelopment.lisa.commands.Command;
 import com.lisadevelopment.lisa.commands.Flag;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 
-import java.awt.*;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 public class GuildInfo extends Command {
@@ -29,34 +26,39 @@ public class GuildInfo extends Command {
         };
     }
 
-    private MessageEmbed getGuildInfo(Member member) {
-        User user = member.getUser();
-        Guild guild = member.getGuild();
-        String roleString = member.getRoles().stream().map(IMentionable::getAsMention)
+    private MessageEmbed getGuildInfo(Guild guild) {
+        String roleString = guild.getRoles().stream().map(IMentionable::getAsMention)
                 .collect(Collectors.joining(", "));
-        String permissionString = member.getPermissions().stream().map(Permission::getName)
-                .collect(Collectors.joining(", "));
+        String owner;
+        if (guild.getOwner() == null)
+            owner = "No owner";
+        else
+            owner = guild.getOwner().getAsMention() + " (" + guild.getOwner().getUser().getName() + "#" +
+                    guild.getOwner().getUser().getDiscriminator() + ")";
+        long botCount = guild.getMembers().stream().filter(mem -> mem.getUser().isBot()).count();
+        long humanCount = guild.getMemberCache().size() - botCount;
         return new EmbedBuilder()
                 .setAuthor("Guild Info", null, guild.getIconUrl())
-                .setColor(Color.decode("random"))
-                .setTimestamp(Instant.now())
+                .setColor(Config.BOT_COLOR)
                 .setThumbnail(guild.getIconUrl())
-                .setDescription(user.getAsMention() + " **(" + guild.getName() + "#" + user.getDiscriminator() + ")**")
                 .addField("Name", guild.getName(), true)
-                .addField("Server Region", guild.getRegion().toString(), true)
-                .addField("Total members", String.valueOf(guild.getMembers().size()), true)
-                .addField("Creation time",
-                        guild.getTimeCreated().format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm:ss")), true)
-                .addField("Join time",
-                        member.getTimeJoined().format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm:ss")), true)
-                .addField("Bot accounts", String.valueOf(guild.getMembers().stream().filter(mem -> mem.getUser().isBot()).count()), true)
-                // .addField("Roles", String.join(',', guild.getRoles().stream().map(IMentionable::getAsMention).collect(Collectors.toCollection())), false)
-                .addField("Permissions", permissionString, false)
+                .addField("Id", guild.getId(), true)
+                .addField("Owner", owner, true)
+                .addField("Server Region", guild.getRegion().getName(), true)
+                .addField("Categories", String.valueOf(guild.getCategoryCache().size()), true)
+                .addField("Text channels", String.valueOf(guild.getTextChannelCache().size()), true)
+                .addField("Voice channels", String.valueOf(guild.getVoiceChannelCache().size()), true)
+                .addField("Total members", String.valueOf(guild.getMemberCache().size()), true)
+                .addField("Human accounts", String.valueOf(humanCount), true)
+                .addField("Bot accounts", String.valueOf(botCount), true)
+                .addField("Roles (" + guild.getRoleCache().size() + ")", roleString, false)
+                .setFooter("Created at:", null)
+                .setTimestamp(guild.getTimeCreated())
                 .build();
     }
 
     @Override
-    public void treat(ExecutionInstance instance) { //TODO to implement
-
+    public void treat(ExecutionInstance instance) {
+        sendMessage(instance, getGuildInfo(instance.getGuild()));
     }
 }
